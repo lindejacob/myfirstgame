@@ -43,7 +43,7 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetButton("Space") && lastshoot > firerate) { 
             GameObject newBullet = Instantiate(bullet);
             lastshoot -= firerate;
-            newBullet.transform.position = transform.position;
+            newBullet.transform.position = transform.position+(Vector3.up*2);
             
         }
         velocity = new Vector3((forward*Time.deltaTime),0, right*Time.deltaTime); 

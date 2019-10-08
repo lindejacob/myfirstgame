@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        velocity = new Vector3(1, 0, 0);
+        velocity = new Vector3(0, 0, speed*Time.deltaTime);
         transform.position += velocity;
     }
     void OnTriggerEnter(Collider collision)
