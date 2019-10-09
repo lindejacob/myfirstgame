@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 	public GameObject Player;
-    public Transform target;
     public float Camspeed = 1f;
     public Vector3 offset;
     // Start is called before the first frame update
@@ -17,7 +16,8 @@ public class CameraController : MonoBehaviour
     void FixedUpdate ()
     {
         Vector3 DesiredPosition = Player.transform.position + offset;
-        transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Camspeed*Time.deltaTime); 
-		transform.LookAt(Player.transform);
+        //transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Camspeed * Time.deltaTime);
+        //transform.position = DesiredPosition;
+        transform.LookAt(Player.transform);
     }
 }

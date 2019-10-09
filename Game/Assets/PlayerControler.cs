@@ -9,6 +9,9 @@ public class PlayerControler : MonoBehaviour
 	private Vector3 velocity = new Vector3(0,0,0);
     private float lastshoot = 0.0f;
     public float firerate = 2.0f;
+
+    private int lane = 1;
+    public int Lane { set { lane = Mathf.Clamp(value, 1, 5); } get { return lane; } }
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +57,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }
