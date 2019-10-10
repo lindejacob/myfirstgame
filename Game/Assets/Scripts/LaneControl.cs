@@ -9,7 +9,10 @@ public class LaneControl : MonoBehaviour
     public float firerate = 2.0f;
     public float Lanesize = 6.0f;
     public Vector3 targetPosition;
+    public GameObject UI;
+    public float waitTime = 2.0f;
 
+    public float waiting = 0;
     private Vector3 startPos;
     private Vector3 velocity = new Vector3(0, 0, 0);
     private int lane = 0;
@@ -25,6 +28,10 @@ public class LaneControl : MonoBehaviour
     void Update()
     {
         lastshoot += Time.deltaTime;
+        waiting += Time.deltaTime;
+
+        if (waiting < waitTime)
+            return;
 
         float right = 0.0f;
         if (Input.GetButtonDown("Right"))
@@ -39,7 +46,7 @@ public class LaneControl : MonoBehaviour
         if (Input.GetButton("Space") && lastshoot > firerate)
         {
             GameObject newBullet = Instantiate(bullet);
-            lastshoot -= firerate;
+            lastshoot = 0;
             newBullet.transform.position = transform.position + (Vector3.up * 2);
 
         }
@@ -54,7 +61,9 @@ public class LaneControl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            UI.SetActive(true);
             Destroy(gameObject);
         }
+
     }
 }
