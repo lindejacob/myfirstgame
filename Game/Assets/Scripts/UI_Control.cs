@@ -15,6 +15,7 @@ public class UI_Control : MonoBehaviour
             scoreText.text = "Score: " + score;
         }
     }
+    public GameObject player;
     private int score;
     // Start is called before the first frame update
     void Start()
@@ -34,5 +35,12 @@ public class UI_Control : MonoBehaviour
     public void SceneSelect(int sceneNumber)
     {
         SceneManager.LoadScene(sceneNumber);
+    }
+    //player dosn't destroy it and the text keeps showing, "new text".
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Coin") ;
+        Destroy(collision.gameObject);
+        score += 1;
     }
 }

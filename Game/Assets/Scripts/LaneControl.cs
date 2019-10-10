@@ -11,6 +11,7 @@ public class LaneControl : MonoBehaviour
     public Vector3 targetPosition;
     public GameObject UI;
     public float waitTime = 2.0f;
+    public float acceleration = 2.0f;
 
     public float waiting = 0;
     private Vector3 startPos;
@@ -53,6 +54,8 @@ public class LaneControl : MonoBehaviour
         targetPosition = new Vector3(startPos.x+(lane*Lanesize), transform.position.y, transform.position.z);
        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
+        speed += acceleration * Time.deltaTime;
+
         velocity = new Vector3(0, 0, (speed * Time.deltaTime));
         transform.position += velocity;
     }
@@ -64,6 +67,5 @@ public class LaneControl : MonoBehaviour
             UI.SetActive(true);
             Destroy(gameObject);
         }
-
-    }
+        }
 }
