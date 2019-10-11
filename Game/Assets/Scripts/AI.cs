@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AI : MonoBehaviour {
     public GameObject Enemy;
-    private float offset = 5f;
+    private float offset = 10f;
     public float speed = 1f;
     private Vector3 startPosition;
 

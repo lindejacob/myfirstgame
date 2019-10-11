@@ -10,12 +10,18 @@ public class Spawner : MonoBehaviour
     public Vector3 spawnoffset;
     public GameObject player;
     public GameObject Road;
+    public int spawnedPatterns;
+    public int PalmAmount;
+    public float DistanceBeetwenPalms;
+    public GameObject palms;
+
     private LaneControl playerScript;
     private float lastspawn;
-    private int spawnedPatterns = 5;
     private float liftwall = 1;
     private float travelDistance;
+    private float travelDistancepalms;
     private int spawnedRotes = 0;
+    private int spawnedPalms = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +33,12 @@ public class Spawner : MonoBehaviour
             spawnedpattern.transform.position = new Vector3(0, liftwall, player.transform.position.z) + spawnoffset* i;
         }
         playerScript = player.GetComponent<LaneControl>();
+        for (int i = 1; i < PalmAmount; i++)
+        {
+            GameObject spawnedtrees = Instantiate(palms);
+            spawnedtrees.transform.position = new Vector3(-17.5F, 0, player.transform.position.z) + (Vector3.forward * DistanceBeetwenPalms * i);
+            spawnedPalms++;
+        }
     }
 
     // Update is called once per frame
@@ -47,5 +59,14 @@ public class Spawner : MonoBehaviour
             spawnedRotes++;
             travelDistance -= 100;
         }
+        travelDistancepalms += playerScript.speed * Time.deltaTime;
+        if (travelDistancepalms > DistanceBeetwenPalms)
+        {
+            travelDistancepalms -= DistanceBeetwenPalms ;
+            GameObject spawnedPalm = Instantiate(palms);
+            spawnedPalm.transform.position = new Vector3(-17.5F, 0, player.transform.position.z) + (Vector3.forward * DistanceBeetwenPalms * this.spawnedPalms);
+            this.spawnedPalms++;
+        }
+
     }
 }
